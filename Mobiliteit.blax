@@ -1,0 +1,470 @@
+﻿DATAMODEL Mobiliteit "Enquête reisgedrag Zeeburgereiland en IJburg"
+
+PRIMARY Wachtwoord
+
+// USES
+//     steekproef_meta 'steekproef_meta.bmix'
+     
+LANGUAGES = 
+   NED
+
+ROLES =
+	HELP "Help",
+	WATERMARK "Data entry watermark",
+   TEMPLATE,
+   TabelIntro, {Introtekst bij gridvragen, nodig voor de telefoonlayout (small_touch)}
+   TabelHelp
+
+SPECIALANSWERS = 
+      DontKnow "weet niet, geen antwoord",
+      Refusal "wil ik niet zeggen",
+      GA "geen antwoord",
+      KG "ik ken er geen",
+      WNGA "Weet niet (meer)/geen antwoord",
+      Nee "nee",
+      NVT "niet van toepassing",
+      WN "weet ik niet",
+      GO "nee, geen opmerkingen"
+      
+//INCLUDE "SYSDATA.incx"
+ 
+//BLOCK Bsteekproef_lezen
+//      EXTERNALS
+//         steek : steekproef_meta('steek_totaal.bdix')
+//      RULES
+//         IF wachtwoord <> EMPTY THEN
+//            IF steek.SEARCH(wachtwoord) THEN
+//               steek.READ
+//            ENDIF
+//         ENDIF
+//         id := steek.id
+//         wachtwoord := steek.wachtwoord    
+//ENDBLOCK
+ 
+TYPE
+TQuestionTextOnly=STRING[1],EMPTY
+
+T_hoe_vaak = (niet "niet",
+            _1keer "1 keer",
+            _2tot3 "2 tot 3 keer",
+            _4keer "4 keer",
+            _5keer_meer "5 keer of meer")
+
+T_aantal =  (geen "geen",
+            _1 "1",
+            _2 "2",
+            _3 "3",
+            _4 "4",
+            _5_meer "5 of meer")
+            
+T_hoe_vaak_gemiddeld = (nooit "nooit gebruikt",
+                        paar_keer "een paar keer per jaar",
+                        maandelijks "maandelijks",
+                        wekelijks "wekelijk",
+                        dagelijks "dagelijks")
+
+BLOCK BBereikbaarheid
+   FIELDS
+   V1_a "Hoe beoordeelt u de bereikbaarheid per <u>auto</u> op, van en naar Zeeburgereiland en IJburg?" 
+   HELP "U kunt hierbij denken aan verkeersveiligheid, snelheid, verbindingen, parkeren." : (zeer_slecht "zeer slecht", slecht, neutraal "neutraal/voldoende", goed, heel_goed "heel goed", nvt "geen mening/niet van toepassing")
+
+V1_b "Kunt u uw keuze bij de vorige vraag over de bereikbaarheid per <u><i>auto</i></u> nader toelichten?" : OPEN, DK
+
+V1_c "Kunt u ook aangeven in welke straat/straten/buurt u dit zo ervaart?" : OPEN, DK
+
+V2_a "Hoe beoordeelt u het <u>openbaar vervoer</u> op, van en naar Zeeburgereiland en IJburg?" 
+   HELP "U kunt hierbij denken aan verkeersveiligheid, snelheid, verbindingen, comfort, kans op zitplaats." : (zeer_slecht "zeer slecht", slecht, neutraal "neutraal/voldoende", goed, heel_goed "heel goed", nvt "geen mening/niet van toepassing")
+
+V2_b "Kunt u uw keuze bij de vorige vraag over het <u><i>openbaar vervoer</i></u> nader toelichten?" : OPEN, DK
+
+V2_c "Kunt u ook aangeven in welke lijn/op welke locatie u dit zo ervaart?" : OPEN, DK
+
+V3_a "Hoe beoordeelt u <u>het fietsen</u> op, van en naar Zeeburgereiland en IJburg?" 
+   HELP "U kunt hierbij denken aan verkeersveiligheid, snelheid, verbindingen, fietscomfort." : (zeer_slecht "zeer slecht", slecht, neutraal "neutraal/voldoende", goed, heel_goed "heel goed", nvt "geen mening/niet van toepassing")
+
+V3_b "Kunt u uw keuze bij de vorige vraag over <u><i>het fietsen</i></u> nader toelichten?" : OPEN, DK
+
+V3_c "Kunt u ook aangeven in welke straat/straten/buurt u dit zo ervaart?" : OPEN, DK
+
+V4 "Bent u bekend met de tijdelijke pont tussen Sluisbuurt en Sporenburg?" : (nee "nee, niet bekend mee", geen_gebruik "ja, maar ik maak geen gebruik van deze pont", maak_gebruik "ja, ik maak gebruik van deze pont"), DK
+
+V5_a "Hoe beoordeelt u het aanbod van deelmobiliteit op Zeeburgereiland en IJburg?" 
+   HELP "U kunt hierbij denken aan deelauto’s, deelfietsen, deelbakfietsen en deelscooters." : (zeer_slecht "zeer slecht", slecht, neutraal "neutraal/voldoende", goed, heel_goed "heel goed", nvt "geen mening/niet van toepassing")
+   
+V5_b "Kunt u uw keuze bij de vorige vraag nader toelichten?" : OPEN, DK
+
+V5_c "Kunt u ook aangeven in welke straat/straten/buurt u dit zo ervaart?" : OPEN, DK
+
+V6_a "Hoe beoordeelt u de bereikbaarheid <u>te voet</u> op, van en naar Zeeburgereiland en IJburg?" 
+   HELP "U kunt hierbij denken aan verkeersveiligheid, verbindingen, verkeerslichten." : (zeer_slecht "zeer slecht", slecht, neutraal "neutraal/voldoende", goed, heel_goed "heel goed", nvt "geen mening/niet van toepassing")
+
+V6_b "Kunt u uw keuze bij de vorige vraag over de bereikbaarheid <u><i>te voet</i></u> nader toelichten?" : OPEN, DK
+
+V6_c "Kunt u ook aangeven in welke straat/straten/buurt u dit zo ervaart?" : OPEN, DK
+
+RULES
+V1_a
+         IF V1_a <> nvt THEN
+            V1_b
+            V1_c
+         ENDIF
+      V2_a
+         IF V2_a <> nvt THEN
+            V2_b
+            V2_c
+         ENDIF
+      V3_a
+         IF V3_a <> nvt THEN
+         V3_b
+         V3_c
+         ENDIF
+      V4
+      V5_a
+         IF V5_a <> nvt THEN
+            V5_b
+            V5_c
+         ENDIF
+      V6_a
+         IF V6_a <> nvt THEN
+            V6_b
+            V6_c
+         ENDIF
+ENDBLOCK {BBereikbaarheid}
+
+BLOCK BNUREIZEN
+GROUP V7_vaak_vervoermiddel_GROUP TEMPLATE "OptionButtons"
+      FIELDS
+      auto (a) "<br></br>auto (of deelauto/taxi)" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+
+      trein (b) "<br></br>trein" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}": T_hoe_vaak, DK
+
+      bus (c) "<br></br>bus" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+      
+      metro (d) "<br></br>metro" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+      
+      tram (e) "<br></br>tram" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+      
+      brommer (f) "<br></br>brommer/scooter" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+      
+      fiets (g) "<br></br>(elektrische) fiets" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+      
+      voet (h) "<br></br>te voet" tabelintro "^{auxV7Text}" TabelHelp "^{auxV7HELP}" : T_hoe_vaak, DK
+LAYOUT
+   LAYOUTSET "Small_Touch"
+      BEFORE trein ITEMSPERPAGE := 1
+      AT trein FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT bus FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT metro FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT tram FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT brommer FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT fiets FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT voet FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+ENDGROUP {V7_vaak_vervoermiddel_GROUP}
+
+GROUP V8_vaak_vervoermiddel_GROUP TEMPLATE "OptionButtons"
+      FIELDS
+      auto_2 (a) "<br></br>auto (of deelauto/taxi)" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+
+      trein_2 (b) "<br></br>trein" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+
+      bus_2 (c) "<br></br>bus" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+      
+      metro_2 (d) "<br></br>metro" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+      
+      tram_2 (e) "<br></br>tram" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+      
+      brommer_2 (f) "<br></br>brommer/scooter" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+      
+      fiets_2 (g) "<br></br>(elektrische) fiets" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+      
+      voet_2 (h) "<br></br>te voet" tabelintro "^{auxV8Text}" TabelHelp "^{auxV8HELP}" : T_hoe_vaak, DK
+LAYOUT
+   LAYOUTSET "Small_Touch"
+      BEFORE trein_2 ITEMSPERPAGE := 1
+      AT trein_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT bus_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT metro_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT tram_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT brommer_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT fiets_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT voet_2 FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+ENDGROUP {V8_vaak_vervoermiddel_GROUP}
+
+AUXFIELDS
+Hoe_reizen_info "<font bold=false>Eerst vragen we u naar uw huidige reisgedrag voor uw (vrijwilligers)werk of studie en vervolgens uw reisgedrag voor andere doeleinden.<br><br>
+Wanneer u gevraagd wordt naar uw reisgedrag voor werk, houd dan niet alleen rekening met het reizen van en naar werk, maar ook met het reizen van en naar eventuele werkrelaties (klanten, opdrachtgevers, etc.). <br><br>
+Als u niet werkt en geen studie volgt, kiest u dan voor ‘niet van toepassing’.</font>" : STRING[1], EMPTY
+
+//V7_vraag "Hoe vaak heeft u in de <u>afgelopen week</u> met de volgende vervoermiddelen gereisd voor uw (vrijwilligers)werk of studie? (1 keer is zowel heen- als terugreis)"
+//   HELP "Als uw reizen bestaan uit meerdere delen, bijvoorbeeld met de fiets naar de trein, kiest u dan het vervoermiddel waarmee u het langste reist. De fietsrit naar de trein vult u dus niet in." : STRING[1], EMPTY
+
+V7_vraag "^{auxV7Text}" 
+   HELP "^{auxV7HELP}" TEMPLATE "TabelIntro" : TQuestionTextOnly
+auxV7Text : STRING  
+auxV7HELP : STRING
+
+V8_vraag "^{auxV8Text}" 
+   HELP "^{auxV8HELP}" TEMPLATE "TabelIntro" : TQuestionTextOnly
+auxV8Text : STRING
+auxV8HELP : STRING
+ 
+RULES
+Hoe_reizen_info
+      
+      auxV7Text := 'Hoe vaak heeft u in de <u>afgelopen week</u> met de volgende vervoermiddelen gereisd voor uw (vrijwilligers)werk of studie? (1 keer is zowel heen- als terugreis)' 
+      auxV7HELP := '<helptekst>Als uw reizen bestaan uit meerdere delen, bijvoorbeeld met de fiets naar de trein, kiest u dan het vervoermiddel waarmee u het langste reist. De fietsrit naar de trein vult u dus niet in.</helptekst>'
+      V7_vraag
+      V7_vaak_vervoermiddel_GROUP
+      auxV8Text := 'Hoe vaak heeft u in de <u>afgelopen week</u> met de volgende vervoermiddelen gereisd voor <u>andere doeleinden</u>, dus niet voor (vrijwilligers)werk of studie? (1 keer is zowel heen- als terugreis)' 
+      auxV8HELP := '<helptekst>Als uw reizen bestaan uit meerdere delen, bijvoorbeeld met de fiets naar de trein, kiest u dan het vervoermiddel waarmee u het langste reist. De fietsrit naar de trein vult u dus niet in.</helptekst>'
+      V8_vraag 
+      V8_vaak_vervoermiddel_GROUP
+
+ENDBLOCK {BNUREIZEN}
+
+BLOCK BVERVOERMIDDEL
+AUXFIELDS
+   V9_intro "<font bold=false>De volgende vragen gaan over de beschikbare vervoermiddelen en abonnementen in uw huishouden." : STRING[1], EMPTY
+
+//V9_vraag "Hoeveel van de onderstaande vervoermiddelen bezit of least uw huishouden?" : STRING[1], EMPTY
+
+V9_vraag "^{auxV9Text}" TEMPLATE "TabelIntro" : TQuestionTextOnly
+auxV9Text : STRING  
+
+//V10_vraag "Hoeveel abonnementen of kortingskaarten voor het openbaar vervoer heeft uw huishouden?" : STRING[1], EMPTY
+V10_vraag "^{auxV10Text}" TEMPLATE "TabelIntro" : TQuestionTextOnly
+auxV10Text : STRING  
+
+
+//V11_vraag "Hoe vaak maakt uw huishouden gemiddeld gebruik van de onderstaande <u>deel</u>vervoermiddelen?" : STRING[1], EMPTY
+V11_vraag "^{auxV10Text}" TEMPLATE "TabelIntro" : TQuestionTextOnly
+auxV11Text : STRING 
+
+GROUP V9_bezit_lease_vervoermiddel_GROUP TEMPLATE "OptionButtons"
+      FIELDS
+      fietsen (a) "<br></br>fietsen (eigen bezit/lease/Swap) excl. elektrische fiets" tabelintro "^{auxV9Text}" : T_aantal, DK
+
+      e_fietsen (b) "<br></br>elektrische fietsen" tabelintro "^{auxV9Text}" : T_aantal, DK
+
+      autos (c) "<br></br>(lease)auto's" tabelintro "^{auxV9Text}" : T_aantal, DK
+      
+      scooter (d) "<br></br>(lease)scooter of (lease)brommer" tabelintro "^{auxV9Text}" : T_aantal, DK
+         
+LAYOUT
+   LAYOUTSET "Small_Touch"
+      BEFORE e_fietsen ITEMSPERPAGE := 1
+      AT e_fietsen FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT fietsen FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT autos FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT scooter FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+ENDGROUP {V9_bezit_lease_vervoermiddel_GROUP}
+
+GROUP V10_abonnementen_GROUP TEMPLATE "OptionButtons"
+      FIELDS
+      GVB (a) "<br></br>GVB" tabelintro "^{auxV10Text}" : T_aantal, DK
+
+      Randstad_Noord_Zone (b) "<br></br>Randstad Noord Zone (1-6 sterren)" tabelintro "^{auxV10Text}" : T_aantal, DK
+
+      Randstad_Noord_Vrij (c) "<br></br>Randstad Noord Vrij" tabelintro "^{auxV10Text}" : T_aantal, DK
+      
+      NS (d) "<br></br>NS" tabelintro "^{auxV10Text}" : T_aantal, DK
+      
+      OV_student "<br></br>OV Jaarkaart student" tabelintro "^{auxV10Text}" : T_aantal, DK
+LAYOUT
+   LAYOUTSET "Small_Touch"
+      BEFORE Randstad_Noord_Zone ITEMSPERPAGE := 1
+      AT Randstad_Noord_Zone FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT Randstad_Noord_Vrij FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT NS FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT OV_student FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+ENDGROUP {V10_abonnement_GROUP}
+
+GROUP V11_vaak_deelvervoer_GROUP TEMPLATE "OptionButtons"
+      FIELDS
+      deelauto (a) "<br></br>deelauto (bijvoorbeeld Snappcar, Greenwheels)" tabelintro "^{auxV11Text}" : T_hoe_vaak_gemiddeld, DK
+
+      particulier_autodelen (b) "<br></br>particulier autodelen (lenen van buren, vrienden of familie)" tabelintro "^{auxV11Text}" : T_hoe_vaak_gemiddeld, DK
+
+      deelfiets (c) "<br></br>deelfiets (bijvoorbeeld OV-fiets" tabelintro "^{auxV11Text}" : T_hoe_vaak_gemiddeld, DK
+      
+      deelbakfiets (d) "<br></br>deelbakfiets (Baqme)" tabelintro "^{auxV11Text}" : T_hoe_vaak_gemiddeld, DK
+      
+      deelscooter (e) "<br></br>deelscooter (bijvoorbeeld Felyx)" tabelintro "^{auxV11Text}" : T_hoe_vaak_gemiddeld, DK
+LAYOUT
+   LAYOUTSET "Small_Touch"
+      BEFORE particulier_autodelen ITEMSPERPAGE := 1
+      AT deelfiets FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT deelbakfiets FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+      AT deelscooter FIELDPANE TEMPLATE "Vertical"(AutoEnter:='True')
+ENDGROUP {V11_vaak_deelvervoer_GROUP}
+
+RULES
+      V9_intro
+      auxV9Text := 'Hoeveel van de onderstaande vervoermiddelen bezit of least uw huishouden?'
+      V9_vraag
+      V9_bezit_lease_vervoermiddel_GROUP
+      auxV10Text := 'Hoeveel abonnementen of kortingskaarten voor het openbaar vervoer heeft uw huishouden?'
+      V10_vraag
+      V10_abonnementen_GROUP
+      auxV11Text := 'Hoe vaak maakt uw huishouden gemiddeld gebruik van de onderstaande <u>deel</u>vervoermiddelen?'
+      V11_vraag
+      V11_vaak_deelvervoer_GROUP
+
+ENDBLOCK {BVERVOERMIDDEL}
+
+BLOCK BHUISHOUDEN
+FIELDS
+   V12 "Wat is de postcode van uw huishouden?" : (_1086 "1086 Steigereiland", _1087 "1087 Haveneiland/Rieteilanden", _1087_2 "1087 Centrumeiland", _1095 "1095 Zeeburgereiland"), DK
+   
+   V13 "Hoelang woont u al op Zeeburgereiland of IJburg?"
+      WATERMARK "jaar" : 0..120, DK
+   
+   V14 "Wat is de samenstelling van uw huishouden?" : (alleenstaand "één persoon, alleenstaande", paar_zonder_kind "(echt)paar zonder (thuiswonende) kind(eren)", paar_met_kind "(echt)paar met (thuiswonende) kind(eren)", eenouder "eenouder met thuiswonend(e) kind(eren)", anders_zonder "anders, zonder thuiswonend(e) kind(eren)", anders_met "anders, met thuiswonend(e) kind(eren)"), DK
+
+//RULES
+//   V12
+//   V13
+//      CHECK
+//      (V13 < 120) "U kunt alleen een cijfer invullen tussen de 0 en 120"
+//   V14
+ENDBLOCK {BHUISHOUDEN}
+
+BLOCK BSLOT
+FIELDS
+   V15 "Heeft u nog opmerkingen of suggesties naar aanleiding van deze enquête?" : OPEN, GO
+   
+ENDBLOCK {BSLOT}
+
+AUXFIELDS
+Toestemming_info "<font bold=false>De gemeente Amsterdam is benieuwd naar het reisgedrag van de bewoners van Zeeburgereiland en IJburg. Onderstaande vragenlijst bevat vragen over hoe u de bereikbaarheid beoordeelt. Ook horen wij graag hoe u zich verplaatst in het gebied. De uitkomsten worden gebruikt om de mobiliteitsplannen voor het gebied te actualiseren. Het invullen van de vragenlijst duurt ongeveer 5 minuten.</font>  
+</font>
+<br><br></br>
+Toestemming <br><br></br>
+<font bold=false>Het invullen van deze vragenlijst is helemaal vrijwillig.<br></br> 
+Er zijn geen goede of foute antwoorden. Bij elke vraag kunt u ervoor kiezen om geen antwoord te geven. Ook kunt u op elk moment de vragenlijst afsluiten. Wij gebruiken uw antwoorden alleen voor het onderzoek als u de vragenlijst afmaakt.
+<br><br></br>
+Wij hebben uw toestemming nodig om uw antwoorden te gebruiken voor dit onderzoek. Wilt u later uw toestemming intrekken? Dat kan op elk moment en zonder uitleg door een mail te sturen naar helpdesk.os@amsterdam.nl of te bellen naar 14020. Wij gebruiken uw antwoorden vanaf dat moment niet meer voor het onderzoek.<br><br></br>Meer informatie over hoe wij omgaan met uw persoonsgegevens kunt u vinden op https://www.amsterdam.nl/privacy/specifieke/privacyverklaringen-enquetes-onderzoek/enquetes/." : STRING[1], EMPTY
+
+Alt_einde "<font bold=false>U kunt niet meedoen aan deze vragenlijst als u geen toestemming geeft voor het verwerken van uw gegevens. Door op 'Vorige' te klikken kunt u uw toestemming aanpassen. Als u op 'Volgende' klikt verlaat u de vragenlijst. Hartelijk bedankt voor uw tijd." : STRING[1], EMPTY
+
+FIELDS
+  id : INTEGER[4]
+  wachtwoord "Wat is uw wachtwoord?"
+   HELP "U kunt uw wachtwoord terugvinden in de brief." : STRING[7]
+
+Toestemming "Ik geef toestemming aan de afdeling Onderzoek en Statistiek om mijn antwoorden op de vragenlijst te gebruiken voor dit onderzoek." : (ja, nee)
+
+EIND "<font bold=false>Dank voor het invullen van de enquête.<br><br>De gemeente Amsterdam maakt plannen voor de bereikbaarheid en leefbaarheid van de toekomst van Zeeburgereiland. Wilt u hier meer over weten? www.amsterdam.nl/projecten/zeeburgereiland/zeeburgereiland-ijburg" : STRING[1], EMPTY
+
+BB "<center><h1>Hoe ervaart u de bereikbaarheid</h1>" : BBEREIKBAARHEID
+BNR "<center><h1>Hoe reist u nu?</h1>" : BNUREIZEN
+BV "<center><h1>Beschikbare vervoermiddelen en abonnementen in uw huishouden</h1>" : BVERVOERMIDDEL
+BH "<center><h1>Uw huishouden</h1>" : BHUISHOUDEN
+BS "<center><h1>Tot slot</h1>" : BSLOT
+//SL :Bsteekproef_lezen
+
+RULES
+//   wachtwoord.keep
+//   SL.keep
+   Toestemming_info.show
+   Toestemming
+      IF Toestemming = ja THEN
+         BB
+         BNR
+         BV
+         BH
+         BS
+         EIND
+   ELSE
+   Alt_einde
+ENDIF
+   
+
+
+
+LAYOUT
+   LAYOUTSET "Large"
+      AT Toestemming FIELDPANE TEMPLATE "Vertical"
+      AT Toestemming_info FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BB.V1_a NEWPAGE
+      BEFORE BB.V1_b NEWPAGE
+      BEFORE BB.V1_c NEWPAGE
+      BEFORE BB.V2_a NEWPAGE
+      BEFORE BB.V2_b NEWPAGE
+      BEFORE BB.V2_c NEWPAGE
+      BEFORE BB.V3_a NEWPAGE
+      BEFORE BB.V3_b NEWPAGE
+      BEFORE BB.V3_c NEWPAGE
+      BEFORE BB.V4 NEWPAGE
+      BEFORE BB.V5_a NEWPAGE
+      BEFORE BB.V5_b NEWPAGE
+      BEFORE BB.V5_c NEWPAGE
+      BEFORE BB.V6_a NEWPAGE
+      BEFORE BB.V6_b NEWPAGE
+      BEFORE BB.V6_c NEWPAGE
+      BEFORE BNR.Hoe_reizen_info NEWPAGE
+      AT BNR.Hoe_reizen_info FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BNR.V7_vraag NEWPAGE
+      AT BNR.V7_vraag FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BNR.V8_vraag NEWPAGE
+      AT BNR.V8_vraag FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BV.V9_intro NEWPAGE
+      AT BV.V9_intro FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BV.V10_vraag NEWPAGE
+      AT BV.V10_vraag FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BV.V11_vraag NEWPAGE
+      AT BV.V11_vraag FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BH.V12 NEWPAGE
+      BEFORE BH.V13 NEWPAGE
+      BEFORE BH.V14 NEWPAGE
+      BEFORE EIND NEWPAGE
+      AT EIND FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE Alt_einde NEWPAGE
+      AT Alt_einde FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BS.V15 NEWPAGE
+      AT BV SECTION TEMPLATE "Default"
+      AT BNR SECTION TEMPLATE "Default"
+   LAYOUTSET "Small_Touch"
+      AT Toestemming FIELDPANE TEMPLATE "Vertical"
+      AT Toestemming_info FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BB.V1_a NEWPAGE
+      BEFORE BB.V1_b NEWPAGE
+      BEFORE BB.V1_c NEWPAGE
+      BEFORE BB.V2_a NEWPAGE
+      BEFORE BB.V2_b NEWPAGE
+      BEFORE BB.V2_c NEWPAGE
+      BEFORE BB.V3_a NEWPAGE
+      BEFORE BB.V3_b NEWPAGE
+      BEFORE BB.V3_c NEWPAGE
+      BEFORE BB.V4 NEWPAGE
+      BEFORE BB.V5_a NEWPAGE
+      BEFORE BB.V5_b NEWPAGE
+      BEFORE BB.V5_c NEWPAGE
+      BEFORE BB.V6_a NEWPAGE
+      BEFORE BB.V6_b NEWPAGE
+      BEFORE BB.V6_c NEWPAGE
+      BEFORE BNR.Hoe_reizen_info NEWPAGE
+      AT BNR.Hoe_reizen_info FIELDPANE TEMPLATE "QuestionTextOnly"
+      AT BNR.V7_vraag FIELDPANE TEMPLATE "TabelIntro"
+      BEFORE BNR.V7_vraag ITEMSPERPAGE := 2
+      BEFORE BNR.V8_vraag NEWPAGE
+      AT BNR.V8_vraag FIELDPANE TEMPLATE "TabelIntro"
+      BEFORE BNR.V8_vraag ITEMSPERPAGE := 2
+      BEFORE BV.V9_intro NEWPAGE
+      AT BV.V9_intro FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BV.V9_vraag ITEMSPERPAGE := 2
+      BEFORE BV.V10_vraag NEWPAGE
+      BEFORE BV.V10_vraag ITEMSPERPAGE := 2
+      BEFORE BV.V11_vraag NEWPAGE
+      BEFORE BV.V11_vraag ITEMSPERPAGE := 2
+      BEFORE BH.V12 NEWPAGE
+      BEFORE BH.V13 NEWPAGE
+      BEFORE BH.V14 NEWPAGE
+      BEFORE EIND NEWPAGE
+      AT EIND FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE Alt_einde NEWPAGE
+      AT Alt_einde FIELDPANE TEMPLATE "QuestionTextOnly"
+      BEFORE BS.V15 NEWPAGE
+      AT BV SECTION TEMPLATE "Default"
+      AT BNR SECTION TEMPLATE "Default"
+ENDMODEL
