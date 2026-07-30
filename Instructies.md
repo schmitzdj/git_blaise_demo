@@ -6,6 +6,7 @@
 - Na het aanmaken van je github account ga naar: https://github.com/schmitzdj/git_blaise_demo
 - Klik op 'fork' ![image](images/fork.png) Je maakt hiermee een kopie, zodat we los van elkaar kunnen oefenen. Dit is niet iets wat je normaal hoeft te doen
 - Installeer Visual Studio Code (https://code.visualstudio.com/)
+- Installeer git
 
 
 # Een aantal termen
