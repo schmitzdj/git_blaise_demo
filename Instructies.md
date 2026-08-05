@@ -4,31 +4,29 @@
 
 - Maak een github account aan
 - Na het aanmaken van je github account ga naar: https://github.com/schmitzdj/git_blaise_demo
-- Klik op 'fork' ![image](images/fork.png) Je maakt hiermee een kopie, zodat we los van elkaar kunnen oefenen. Dit is niet iets wat je normaal hoeft te doen
+- Klik op 'fork' ![image](images/fork.png) (Je maakt hiermee een kopie, zodat we los van elkaar kunnen oefenen. Dit is niet iets wat je normaal hoeft te doen)
 - Installeer Visual Studio Code (https://code.visualstudio.com/)
-- Installeer git
+- Installeer git (https://git-scm.com/install/windows) met alle standaard instellingen
 
 
 # Een aantal termen
 
 De onderstaande termen komen voorbij als je met git gaat werken. 
 - Repository: de git map waarin ook de geschiedenis wordt bijgehouden
-- Clone: maak een lokale kopie van de repository
+- Branch: een aftakking van een 'commit'
 - Local: de lokale versie van de repository/branch
 - Remote: de versie op de server van de repository/branch
+- Clonen: maak een lokale kopie van de repository
 - Stagen: selecteren van de wijzignen die je wilt gaan 'committen'
 - Commit: het toevoegen/opslaan van de aangebrachte wijzigingen
 - Push: het versturen van de 'gecommitte' wijzigingen naar de repository op de server
 - Pull: het ophalen van de wijzingen die op de server versie van de repository staan
 - Merge: het toevoegen van de wijzingen aan een branch
 - Pull request: het verzoek om de wijzingen op een branch te 'mergen' naar een andere branch
-- Branch: een aftakking van een 'commit'
-
 
 
 # Interface of command line
 Je kan vanuit de command line of vanuit een GUI (Graphical User Interface) met git werken. Voor deze demo gaan we met de GUI van visual studio code werken. Hiermee worden op de achtergrond de commandos verstuurd die je normaal in de command line zou typen. Hieronder staat een beschrijving van hoe ik verwacht dat jullie workflow eruit gaat zien. 
-
 
 
 # De waarschijnlijke DCU-workflow
@@ -36,6 +34,7 @@ Je kan vanuit de command line of vanuit een GUI (Graphical User Interface) met g
 - Maak bij de start van een project een git-repository (repo) aan.
     - Afhankelijk van de git-provider (github.com, gitlab.com, dev.azure.com) zit het er net even anders uit
     - Zorg dat de gitignore in de map staan want we willen alleen van de blax, layout en settings de wijzignen bijhouden.
+        - Het is mogelijk om een template map aan te maken, zodat je dit niet elke keer handmatig moet doen
 - Clone de repository (iedereen die aan het project werkt maakt een eigen clone op haar/zijn computer)
     - GUI: ![image](images/clone.png)
     - command line: git clone [hier de url naar je repository]
