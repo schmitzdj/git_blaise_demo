@@ -77,12 +77,14 @@ V2_a "Hoe beoordeelt u het <u>openbaar vervoer</u> op, van en naar Zeeburgereila
 
 V2_b "Kunt u uw keuze bij de vorige vraag over het <u><i>openbaar vervoer</i></u> nader toelichten?" : OPEN, DK
 
-V2_c "Kunt u ook aangeven in welke lijn/op welke locatie u dit zo ervaart?" : OPEN, DK
+V2_c "Kunt u ook aangeven in welke lijn/op welke locatie u dit zo ervaart? test" : OPEN, DK
 
 V3_a "Hoe beoordeelt u <u>het fietsen</u> op, van en naar Zeeburgereiland en IJburg?" 
    HELP "U kunt hierbij denken aan verkeersveiligheid, snelheid, verbindingen, fietscomfort." : (zeer_slecht "zeer slecht", slecht, neutraal "neutraal/voldoende", goed, heel_goed "heel goed", nvt "geen mening/niet van toepassing")
 
 V3_b "Kunt u uw keuze bij de vorige vraag over <u><i>het fietsen</i></u> nader toelichten?" : OPEN, DK
+
+//testtest
 
 V3_c "Kunt u ook aangeven in welke straat/straten/buurt u dit zo ervaart?" : OPEN, DK
 
