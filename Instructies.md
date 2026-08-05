@@ -64,7 +64,7 @@ Je kan vanuit de command line of vanuit een GUI (Graphical User Interface) met g
     - Hierbij kies je ervoor naar welke branch je wijzingen wilt mergen. Die mag elke branch zijn, maar in de praktijk gaat het bij jullie om wijzingen van jullie zelf aangemaakte branch naar main.
     - Kies een collega aan die de pull request moet bekijken. Dit is het moment om de wijzigen van je collega te beoordelen en te testen. Die kan puur op basis van de code, maar waarschijnlijker is het handiger om de branch van je collega te openen en dan te 'pullen'. Je hebt dan een kopie van de branch van je collega. Je nu b.v. de enquete testen om te zien of alles goed is gegaan.
     - Als je akkoord bent met de wijzigingen dan kan je de pull request goedkeuren. Na het goedkeuren worden de wijzigingen 'gemerged' naar de main branch (of de andere branch die je hebt uitgekozen)
-- Feest! Je hebt alle git stappen doorlopen :-)
+- Feest!!!!! Je hebt alle git stappen doorlopen :-)
 
 
 # Werkafspraken
