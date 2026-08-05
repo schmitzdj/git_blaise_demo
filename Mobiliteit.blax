@@ -19,12 +19,12 @@ SPECIALANSWERS =
       DontKnow "weet niet, geen antwoord",
       Refusal "wil ik niet zeggen",
       GA "geen antwoord",
-      KG "ik ken er geen",
       WNGA "Weet niet (meer)/geen antwoord",
       Nee "nee",
       NVT "niet van toepassing",
       WN "weet ik niet",
-      GO "nee, geen opmerkingen"
+      GO "nee, geen opmerkingen",
+      IDNM "ik doe niet mee!"
       
 //INCLUDE "SYSDATA.incx"
  
