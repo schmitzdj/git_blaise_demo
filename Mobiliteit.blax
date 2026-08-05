@@ -42,6 +42,9 @@ SPECIALANSWERS =
 //ENDBLOCK
  
 TYPE
+T_gezellig = ( gezellig, 
+               ongezellig)
+
 TQuestionTextOnly=STRING[1],EMPTY
 
 T_hoe_vaak = (niet "niet",
