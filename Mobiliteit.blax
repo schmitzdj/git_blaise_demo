@@ -48,7 +48,8 @@ T_hoe_vaak = (niet "niet",
             _1keer "1 keer",
             _2tot3 "2 tot 3 keer",
             _4keer "4 keer",
-            _5keer_meer "5 keer of meer")
+            _5keer_meer "5 keer of meer",
+            altijd "altijd")
 
 T_aantal =  (geen "geen",
             _1 "1",
